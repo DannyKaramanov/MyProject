@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { take } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/entities/employee';
 
@@ -39,6 +40,7 @@ export class EmployeeEditComponent {
     if (this.editMode) {
       this.employeeService
         .getEmployee(this.id)
+        .pipe(take(1))
         .subscribe((responseEmployee) => {
           this.createForm = this.formBuilder.group({
             name: responseEmployee.name,

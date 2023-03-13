@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { take } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/entities/employee';
 
@@ -20,9 +21,7 @@ export class EmployeeDetailsComponent {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
-      console.log(this.id);
-      this.employeeService.getEmployee(this.id).subscribe((viewEmployee) => {
-        console.log('task to viwe', viewEmployee);
+      this.employeeService.getEmployee(this.id).pipe(take(1)).subscribe((viewEmployee) => {
         this.employee = viewEmployee;
       });
     });

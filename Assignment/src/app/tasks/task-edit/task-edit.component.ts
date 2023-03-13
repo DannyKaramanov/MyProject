@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { TaskService } from 'src/app/services/task.service';
 import { Employee } from 'src/entities/employee';
@@ -55,7 +55,7 @@ export class TaskEditComponent implements OnInit {
             });
           }
         })
-      )
+      ).pipe(take(1))
       .subscribe();
   }
 

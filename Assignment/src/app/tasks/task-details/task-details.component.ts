@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { take } from 'rxjs';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/entities/task';
 
@@ -18,7 +19,7 @@ export class TaskDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+    this.route.params.pipe(take(1)).subscribe((params: Params) => {
       this.id = params['id'];
       this.taskService.getTask(this.id).subscribe((viewTask) => {
         this.task = viewTask;

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, take } from 'rxjs';
 import { Employee } from 'src/entities/employee';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class EmployeeService {
         salary: employee.salary,
         numberTasks: employee.numberTasks,
       })
-      .subscribe();
+      .pipe(take(1)).subscribe();
   }
 
   getEmployee(id: string): Observable<Employee> {
@@ -48,7 +48,7 @@ export class EmployeeService {
           dateOfBirth: employee.dateOfBirth,
           salary: employee.salary,
         }
-      )
+      ).pipe(take(1))
       .subscribe();
   }
 
@@ -58,7 +58,7 @@ export class EmployeeService {
       .delete(
         `https://ng-assignment-f62b5-default-rtdb.firebaseio.com/employees/${employeeId}.json`,
         { headers }
-      )
+      ).pipe(take(1))
       .subscribe(() => {
         this.getAllEmployees();
       });

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Task } from 'src/entities/task';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of, Subject, take } from 'rxjs';
 import { map } from 'rxjs';
 import { Employee } from 'src/entities/employee';
 
@@ -21,7 +21,7 @@ export class TaskService {
         description: task.description,
         assignee: task.assignee,
         dueDate: task.dueDate,
-      })
+      }).pipe(take(1))
       .subscribe();
   }
 
@@ -41,7 +41,7 @@ export class TaskService {
           assignee: task.assignee,
           dueDate: task.dueDate,
         }
-      )
+      ).pipe(take(1))
       .subscribe();
   }
 
@@ -61,7 +61,7 @@ export class TaskService {
           salary: employee.salary,
           numberTasks: numberTasks,
         }
-      )
+      ).pipe(take(1))
       .subscribe();
   }
 
@@ -86,7 +86,7 @@ export class TaskService {
             });
           }
         })
-      )
+      ).pipe(take(1))
       .subscribe();
     this.tasks = items;
     this.tasksChanged.next(this.tasks.slice());
@@ -99,7 +99,7 @@ export class TaskService {
       .delete(
         `https://ng-assignment-f62b5-default-rtdb.firebaseio.com/items/${itemId}.json`,
         { headers }
-      )
+      ).pipe(take(1))
       .subscribe(() => {
         this.getAllTasks();
         this.tasksChanged.next(this.tasks);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 import { Employee } from 'src/entities/employee';
@@ -24,7 +24,7 @@ export class EmployeeStartComponent implements OnInit {
   ngOnInit(): void {
     this.employeeService
       .getAllEmployees()
-      .pipe(
+      .pipe(take(1),
         map((response: any) => {
           if (response) {
             Object.keys(response).forEach((key) => {

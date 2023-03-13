@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/entities/employee';
 
@@ -20,7 +20,7 @@ export class BestEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.employeeService
       .getAllEmployees()
-      .pipe(
+      .pipe(take(1),
         map((response: any) => {
           let employees: Employee[] = [];
           if (response) {
