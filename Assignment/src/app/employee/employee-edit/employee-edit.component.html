@@ -1,0 +1,31 @@
+<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+  <h2>Create an employee</h2>
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input id="name" type="text" formControlName="name" matInput />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input id="email" type="text" formControlName="email" matInput />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Phone Number</mat-label>
+    <input id="phone" type="number" formControlName="phone" matInput />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Date of Birth</mat-label>
+    <input
+      id="dateOfBirth"
+      type="date"
+      formControlName="dateOfBirth"
+      matInput
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Salary</mat-label>
+    <input id="salary" type="number" formControlName="salary" matInput />
+  </mat-form-field>
+  <button mat-raised-button class="button" type="submit">
+    Create Employee
+  </button>
+</form>

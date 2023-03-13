@@ -1,0 +1,41 @@
+<div *ngIf="employees">
+  <form *ngIf="taskForm" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <h2>Task</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>title</mat-label>
+      <input id="title" type="text" formControlName="title" matInput />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>description</mat-label>
+      <input
+        id="description"
+        type="text"
+        formControlName="description"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field>
+      Date
+      <input matInput [matDatepicker]="picker" formControlName="dueDate" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-select id="assignee" formControlName="assignee">
+        <mat-option
+          *ngFor="let employee of employees"
+          value="{{ employee.id }}"
+          >{{ employee.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <button
+      [disabled]="!taskForm.valid"
+      mat-raised-button
+      class="button"
+      type="submit"
+    >
+      Save
+    </button>
+  </form>
+</div>

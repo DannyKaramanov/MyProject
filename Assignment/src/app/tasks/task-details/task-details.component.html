@@ -1,0 +1,12 @@
+<mat-card class="example-card" *ngIf="task">
+  <mat-card-header>
+    <mat-card-title>{{ task.title }}</mat-card-title>
+    <mat-card-subtitle>{{ task.assignee }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{ task.description }}
+    </p>
+    <div mat-card-avatar class="example-header-image"></div>
+  </mat-card-content>
+</mat-card>
